@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Микрозаймы{% endblock %}
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="cl-8">
+    <p> Введите необходимую сумму и количество дней и узнаете сколько нужно будет вернуть:</p>
+    <table align="center">
+      <tr>
+        <td>Взять</td> 
+        <td><input id="sum" class="form-control-number"></td>
+        <td>Максимальная сумма 15000 рублей</td>
+      </tr>
+      <tr>
+        <td>Дней</td>
+        <td><input id="days"></td>
+        <td>Максимальный срок 28 дней</td>
+      </tr>
+      <tr>
+        <td>Отдать</td>
+        <td><input id="get"></td>
+        <td>Сумма займа плюс проценты</td>
+      </tr>
+      <script type="text/javascript">
+        function gid(id) { return document.getElementById(id); }
+         
+        gid('sum').onkeyup = function() {calc();}
+        gid('days').onkeyup = function() {calc();}
+         
+        function calc(){
+            var sum = parseInt(gid('sum').value),
+                day = parseInt(gid('days').value);
+             if(sum>0 && day>0){
+                    gid('get').value = (sum+(sum*0.01*day)).toFixed(0);
+             }
+        }
+      </script>
+    </table><br />
+    <p>Займ можно получить в любом офисе компании предоставив паспорт гражданина РФ. 
+    Процентная ставка 1% в день</p>
+  </div>
+</div>
+{% endblock main %}
