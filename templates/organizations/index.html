@@ -2,6 +2,7 @@
 
 {% block title %}Микрозаймы{% endblock %}
 
+
 {% block main %}
 <div class="row justify-content-center">
   <div class="cl-8">
@@ -10,12 +11,17 @@
       <tr>
         <td>Взять</td> 
         <td><input id="sum" class="form-control-number"></td>
-        <td>Максимальная сумма 15000 рублей</td>
+        <td>Максимальная сумма {{ organization.summa_max }} рублей</td>
       </tr>
       <tr>
         <td>Дней</td>
         <td><input id="days"></td>
-        <td>Максимальный срок 28 дней</td>
+        <td>Максимальный срок {{ organization.srok_max }} дней</td>
+      </tr>
+      <tr>
+        <td>В день</td>
+        <td><input id="getd"></td>
+        <td>{{ organization.stavka_max }}% в день</td>
       </tr>
       <tr>
         <td>Отдать</td>
@@ -32,13 +38,16 @@
             var sum = parseInt(gid('sum').value),
                 day = parseInt(gid('days').value);
              if(sum>0 && day>0){
-                    gid('get').value = (sum+(sum*0.01*day)).toFixed(0);
+                    gid('get').value = (sum+(sum*{{ organization.stavka_max }}/100*day)).toFixed(0);
+                    gid('getd').value = (sum*{{ organization.stavka_max }}/100).toFixed(0);
              }
         }
       </script>
     </table><br />
     <p>Займ можно получить в любом офисе компании предоставив паспорт гражданина РФ. 
-    Процентная ставка 1% в день</p>
+    Процентная ставка {{ organization.stavka_max }}% в день</p>
   </div>
 </div>
 {% endblock main %}
+
+{% block short_name %} {{ organization.short_name}}, 2017 {% endblock %}

@@ -1,0 +1,61 @@
+{% extends "organizations/base_admin.html" %}
+
+
+{% block main %}
+ <p>Для завершения настроек нажмите <a href="{% url 'organizations:logout' object.slug %}">Выход</a></p>
+{% if messages %}
+  <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+   {{ message }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if user.username == object.slug%}
+<h5>Организация</h5>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить изменения" />
+</form>  
+
+<h5>Офисы</h5>
+
+<table class="table">
+  <tbody>
+  {% for office in offices %}
+    <tr>
+      <td>{{ office.city }}</td>
+      <td>{{ office.address }}</td>
+      <td>{{ office.schedule }}</td>
+      <td><a href="{% url 'organizations:contentdoc' office.id %}"> Редактировать </a></td>
+      <td><a href="{% url 'organizations:contentdoc' office.id %}"> Удалить </a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h5>Документы</h5>
+
+<table class="table">
+  <tbody>
+  {% for doc in docs%}
+    <tr>
+      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> {{ doc.name }} </a></td>
+      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> Редактировать </a></td>
+      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> Удалить </a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<p><a href="{% url 'organizations:logout' object.slug %}">Выход</a></p>
+
+{% else %} 
+<p> У вас нет прав на редактирование </p>
+  
+{% endif %}
+
+{% endblock main %}
+
+

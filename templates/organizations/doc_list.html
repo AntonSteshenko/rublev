@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} Документы {% endblock title %}
+
+
+{% block main %}
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Документ</th>
+      <th scope="col">PDF</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for doc in object_list%}
+    <tr>
+      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> {{ doc.name }} </a></td>
+      <td><a href="{{ doc.file_doc }}"> Скачать </a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+  
+{% endblock main %}

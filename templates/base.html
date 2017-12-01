@@ -13,16 +13,17 @@
   <body>
     <div class="container">
       <header>
+{% block header %}
         <div class="row justify-content-center align-items-center">
           <div class="col-auto"><h1>РУБЛЁВ</h1></div>
           <div class="col-auto"> 
             <h2 align="center">МИКРОЗАЙМЫ НАЛИЧНЫМИ</h2>
             <div class="row justify-content-center">
-              <div class="col-auto">ООО "Микрокредитная компания "Нейт"</div>
-              <div class="col-auto">реестр № 651403595004833</div>
+              <div class="col-auto">{{ organization.full_name }}</div>
+              <div class="col-auto">реестр № {{ organization.reestr }}</div>
             </div>
           </div>
-          <div class="col-auto"><h4>(800)1234567</h4></div>
+          <div class="col-auto"><h4>{{ organization.phone }}</h4></div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,13 +31,14 @@
           </button>
           <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-item nav-link active" href="{% url 'index' %}">КАЛЬКУЛЯТОР <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="#">ДОКУМЕНТЫ</a>
-              <a class="nav-item nav-link" href="#">ОФИСЫ</a>
-              <a class="nav-item nav-link" href="{% url 'feedback' %}">ОБРАТНАЯ СВЯЗЬ</a>
+              <a class="nav-item nav-link active" href="{% url 'organizations:index' organization.slug %}">КАЛЬКУЛЯТОР <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="{% url 'organizations:doc' organization.slug %}">ДОКУМЕНТЫ</a>
+              <a class="nav-item nav-link" href="{% url 'organizations:office' organization.slug %}">ОФИСЫ</a>
+              <a class="nav-item nav-link" href="{% url 'organizations:feedback' organization.slug %}">ОБРАТНАЯ СВЯЗЬ</a>
             </div>
           </div>
         </nav>
+{% endblock header %}
       </header>
 
    
@@ -47,7 +49,7 @@
       </main>
       <footer>
         <div class="row justify-content-center">
-          <div> ООО "МКК Нейт", 2017</div>
+          <div> {% block short_name %}{% endblock %}</div>
         </div>
       </footer>
     </div>

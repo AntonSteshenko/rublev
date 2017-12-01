@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Офисы {% endblock title %}
+
+
+{% block main %}
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Город</th>
+      <th scope="col">Адрес</th>
+      <th scope="col">Часы работы</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for office in object_list%}
+    <tr>
+      <td>{{ office.city }}</td>
+      <td>{{ office.address }}</td>
+      <td>{{ office.schedule }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+  
+{% endblock main %}
