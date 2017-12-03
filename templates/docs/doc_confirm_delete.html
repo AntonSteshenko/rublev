@@ -1,0 +1,21 @@
+{% extends "organizations/base_admin.html" %}
+
+
+{% block main %}
+
+{% if user.username == slug %}
+
+<h4>Удаление документа</h4>
+<p>Документ {{ object.name }} будет удален </p> 
+
+<form method="post">
+    {% csrf_token %}
+     <input type="submit" value="Удалить" />
+</form>  
+
+{% else %} 
+<p> У вас нет прав на редактирование </p>
+  
+{% endif %}
+
+{% endblock main %}

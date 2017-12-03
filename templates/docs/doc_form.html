@@ -1,0 +1,28 @@
+{% extends "organizations/base_admin.html" %}
+
+
+{% block main %}
+
+{% if messages %}
+  <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+   {{ message }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if user.username == slug %}
+
+<h5>Редактирование документа</h5>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить изменения" />
+</form>  
+
+{% else %} 
+<p> У вас нет прав на редактирование </p>
+  
+{% endif %}
+
+{% endblock main %}

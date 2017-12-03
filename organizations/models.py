@@ -12,23 +12,8 @@ class Organization(models.Model):
     feedback_email = models.EmailField()
 
     def __str__(self):
-        return self.short_name
-
-class Doc(models.Model):
-    name = models.CharField(max_length = 150)
-    text = models.TextField()
-    file_doc = models.FileField(null=True, blank=True)
-    org_id = models.ForeignKey('Organization', on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.name
+        return self.slug
 
 
-class Office(models.Model):
-    city = models.CharField(max_length = 25)
-    address = models.CharField(max_length = 150)
-    schedule = models.CharField(max_length = 150)
-    org_id = models.ForeignKey('Organization', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.address
+

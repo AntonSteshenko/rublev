@@ -15,8 +15,12 @@
   <tbody>
   {% for doc in object_list%}
     <tr>
-      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> {{ doc.name }} </a></td>
-      <td><a href="{{ doc.file_doc }}"> Скачать </a></td>
+      <td><a href="{% url 'docs:contentdoc' doc.id %}"> {{ doc.name }} </a></td>
+      <td>
+        {% if doc.file_doc %}
+        <a href="{{ doc.file_doc }}"> Скачать </a>
+        {% endif %}
+      </td>
     </tr>
   {% endfor %}
   </tbody>

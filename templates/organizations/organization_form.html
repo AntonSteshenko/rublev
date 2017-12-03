@@ -20,6 +20,7 @@
 </form>  
 
 <h5>Офисы</h5>
+<p><a href="{% url 'offices:add' object.slug %}"> Добавить</a></p>
 
 <table class="table">
   <tbody>
@@ -28,22 +29,24 @@
       <td>{{ office.city }}</td>
       <td>{{ office.address }}</td>
       <td>{{ office.schedule }}</td>
-      <td><a href="{% url 'organizations:contentdoc' office.id %}"> Редактировать </a></td>
-      <td><a href="{% url 'organizations:contentdoc' office.id %}"> Удалить </a></td>
+      <td><a href="{% url 'offices:edit' office.id %}"> Редактировать </a></td>
+      <td><a href="{% url 'offices:delete' office.id %}"> Удалить </a></td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
 
 <h5>Документы</h5>
+<p><a href="{% url 'docs:add' object.slug %}"> Добавить</a></p>
 
 <table class="table">
   <tbody>
   {% for doc in docs%}
     <tr>
-      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> {{ doc.name }} </a></td>
-      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> Редактировать </a></td>
-      <td><a href="{% url 'organizations:contentdoc' doc.id %}"> Удалить </a></td>
+      <td><a href="{% url 'docs:contentdoc' doc.id %}"> {{ doc.name }} </a></td>
+      <td><a href="{{ doc.file_doc }}"> {{ doc.file_doc }} </a></td>
+      <td><a href="{% url 'docs:edit' doc.id %}"> Редактировать </a></td>
+      <td><a href="{% url 'docs:delete' doc.id %}"> Удалить </a></td>
     </tr>
   {% endfor %}
   </tbody>

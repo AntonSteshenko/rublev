@@ -9,7 +9,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
 from feedbacks.models import Feedback
-from .models import Organization, Doc, Office
+from .models import Organization
+from offices.models import Office
+from docs.models import Doc
 
 
 # Create your views here.
@@ -54,10 +56,6 @@ class DocListView(OrganizationMixin, ListView):
         return Doc.objects.filter(org_id=self.args[0]) 
 
 
-class DocContentView(DetailView):
-    model = Doc
-
-
 class OfficeListView(OrganizationMixin, ListView):
     model = Office
     def get_queryset(self):
@@ -71,7 +69,6 @@ class OrgUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['offices'] = Office.objects.filter(org_id = self.object.slug)
-        print(context)
         context['docs'] = Doc.objects.filter(org_id = self.object.slug)
         return context  
 
