@@ -130,3 +130,8 @@ STATICFILES_DIRS = [
     'static/css',
     'static/js',
 ]
+
+try:
+    from local_settings import *
+except ImportError:
+    print("Warning! local_settings are not defined!")
